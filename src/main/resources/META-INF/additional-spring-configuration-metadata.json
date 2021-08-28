@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "mq.kill.success.mail.queue",
+      "type": "java.lang.String",
+      "description": "Description for mq.kill.success.mail.queue."
+  }
+] }

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!--指定命名空间-->
+<mapper namespace="com.weiheng.secondkill.kill.mapper.ItemKillMapper">
+
+    <!--
+    id:方法名
+    -->
+    <select id="selectAll" resultType="com.weiheng.secondkill.entity.ItemKill">
+        SELECT t_item_kill.*,
+               t_item.name AS itemName,
+               CASE
+                   WHEN now() BETWEEN t_item_kill.start_time
+                            AND t_item_kill.end_time
+                       AND total > 0
+                       THEN
+                       1
+                   ELSE 0
+                   END     as canKill
+        FROM item_kill t_item_kill
+                 LEFT JOIN item t_item ON t_item_kill.item_id = t_item.id
+        where t_item_kill.is_active = 1;
+    </select>
+
+
+    <select id="selectOne" resultType="com.weiheng.secondkill.entity.ItemKill">
+        SELECT t_item_kill.*,
+               t_item.name AS itemName,
+               CASE
+                   WHEN now() BETWEEN t_item_kill.start_time
+                            AND t_item_kill.end_time
+                       AND total > 0
+                       THEN
+                       1
+                   ELSE 0
+                   END     as canKill
+        FROM item_kill t_item_kill
+                 LEFT JOIN item t_item ON t_item_kill.item_id = t_item.id
+        where t_item_kill.is_active = 1
+          and t_item_kill.item_id = #{id};
+    </select>
+
+    <update id="updateKillItem">
+        update item_kill
+        set total = total - 1
+        where item_id = #{killId};
+    </update>
+
+    <select id="selectOneV2" resultType="com.weiheng.secondkill.entity.ItemKill">
+        SELECT t_item_kill.*,
+               t_item.name as itemName,
+               (case
+                    when now() BETWEEN t_item_kill.start_time and t_item_kill.end_time
+                        then 1
+                    else 0
+                   end)    as canKill
+        FROM item_kill t_item_kill
+                 LEFT JOIN item AS t_item on t_item.id = t_item_kill.item_id
+        WHERE t_item_kill.is_active = 1
+          AND t_item_kill.item_id = #{killId}
+          AND t_item_kill.total > 0;
+    </select>
+
+    <update id="updateKillItemV2">
+        update item_kill
+        set total = total - 1
+        where item_id = #{killId}
+          and total > 0;
+    </update>
+
+</mapper>

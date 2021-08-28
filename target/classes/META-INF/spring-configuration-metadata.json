@@ -1,0 +1,41 @@
+{
+  "groups": [
+    {
+      "name": "jwt",
+      "type": "com.weiheng.secondkill.auth.jwt.properties.JwtSecurityProperties",
+      "sourceType": "com.weiheng.secondkill.auth.jwt.properties.JwtSecurityProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "jwt.base64-secret",
+      "type": "java.lang.String",
+      "description": "Base64对该令牌进行编码",
+      "sourceType": "com.weiheng.secondkill.auth.jwt.properties.JwtSecurityProperties"
+    },
+    {
+      "name": "jwt.header",
+      "type": "java.lang.String",
+      "description": "Request Headers ： Authorization",
+      "sourceType": "com.weiheng.secondkill.auth.jwt.properties.JwtSecurityProperties"
+    },
+    {
+      "name": "jwt.token-start-with",
+      "type": "java.lang.String",
+      "description": "令牌前缀，最后留个空格 Bearer",
+      "sourceType": "com.weiheng.secondkill.auth.jwt.properties.JwtSecurityProperties"
+    },
+    {
+      "name": "jwt.token-validity-in-seconds",
+      "type": "java.lang.Long",
+      "description": "令牌过期时间 此处单位\/毫秒",
+      "sourceType": "com.weiheng.secondkill.auth.jwt.properties.JwtSecurityProperties"
+    },
+    {
+      "name": "mq.kill.success.mail.queue",
+      "type": "java.lang.String",
+      "description": "Description for mq.kill.success.mail.queue."
+    }
+  ],
+  "hints": []
+}

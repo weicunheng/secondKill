@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weiheng.secondkill.auth.mapper.UserMapper">
+
+    <select id="selectByUsername" resultType="com.weiheng.secondkill.entity.User">
+        select *
+        from user
+        where user_name = #{username};
+    </select>
+
+
+    <select id="selectByOrderNo" resultType="com.weiheng.secondkill.entity.User">
+        select *
+        from user as t_user
+                 left join item_kill_success as t_item_kill
+                           on t_item_kill.user_id = t_user.id
+        where t_item_kill.code = #{orderNo};
+    </select>
+
+</mapper>
